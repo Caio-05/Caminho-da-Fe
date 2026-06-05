@@ -1,0 +1,114 @@
+<!-- TABELA NUTRIÇÃO DO EVENTO -->
+    <div style="margin-top:20px">
+      <table class="nut-table">
+        <thead><tr><th>Período</th><th>Carboidrato</th><th>Fonte Glicose</th><th>Fonte Frutose</th><th>Frequência</th></tr></thead>
+        <tbody>
+          <tr><td>Café da manhã (2–3h antes)</td><td class="highlight">2–3g/kg</td><td>Aveia, pão, banana</td><td>Mel, suco</td><td>Refeição única</td></tr>
+          <tr><td>0h–1h em sela</td><td class="highlight">60g</td><td>Gel ou bebida</td><td>Não obrigatório</td><td>A cada 30min</td></tr>
+          <tr><td>1h+ em sela</td><td class="highlight">90g/hora</td><td>Maltodextrina/gel (60g)</td><td>Frutose/gel 2:1 (30g)</td><td>A cada 20–25min</td></tr>
+          <tr><td>Pós-Dia 1 (pernoite)</td><td class="highlight">1–1,2g/kg/h × 4h</td><td>Arroz, macarrão, batata</td><td>Banana, suco</td><td>Imediato + jantar</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="notes-section">
+      <h4>Estratégia de Corrida — Pontos Críticos</h4>
+      <ul>
+        <li>Primeiras 2h do Dia 1: vá devagar mesmo que pareça fácil. A euforia destrói atletas na metade do percurso.</li>
+        <li>Subidas: se a FC ultrapassar Z3, diminua o ritmo. Preserve o sistema para o Dia 2.</li>
+        <li>Chegando na pernoite: proteína + carboidrato imediatamente, eleve pernas 20 min, banho morno (não gelado).</li>
+        <li>Banho gelado reduz o processo inflamatório que promove adaptação — banho morno é melhor entre etapas.</li>
+        <li>Dia 2: Z2 estrito nos primeiros 30km. Se as pernas "abrirem" após isso — ótimo. Se não, mantenha Z2.</li>
+        <li>Últimos 20km: deixe tudo no percurso. A chegada em Aparecida vale cada subida das 10 semanas.</li>
+      </ul>
+    </div>
+  </div>
+
+</div><!-- end container -->
+
+<!-- FOOTER -->
+<div class="footer">
+  <div class="container">
+    <div class="footer-tag">Versão 2.0 · Embasamento Científico · Início: 08 Jun 2026 · Evento: ~16 Ago 2026</div>
+    <p class="footer-note">
+      Plano calibrado para seu perfil atual e baseado em evidências: treinamento polarizado (Seiler, 2010), protocolo VO₂Max norueguês 4×4 (Helgerud et al., 2007), sweetspot 88–93% FTP (Coggan), gut training progressivo com glicose+frutose 2:1 (até 90g/h), e carb loading 10–12g/kg/dia nas 36–48h pré-evento. Quando confirmar a data exata do evento, as semanas do taper serão ajustadas com precisão.
+    </p>
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModalOverlay(event)">
+  <div class="modal">
+    <div class="modal-header">
+      <div>
+        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ouro);opacity:.6;margin-bottom:5px" id="modal-tag"></div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--creme);letter-spacing:1px" id="modal-title"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+function showWeek(idx){
+  document.querySelectorAll('.week-content').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  document.querySelectorAll('.week-tab').forEach((el,i)=>el.classList.toggle('active',i===idx));
+  document.querySelectorAll('.prog-week').forEach((el,i)=>el.classList.toggle('active',i===idx));
+}
+
+const sessions={
+  's1_ter':{tag:'S1 · Terça 09/jun',title:'Endurance + Picos Z4',objetivo:'Trabalhar a base aeróbica com estímulos de limiar. Ensinar o corpo a manter Z2 após esforços Z4 — réplica das subidas inesperadas do Caminho da Fé.',estrutura:[{nome:'Aquecimento',desc:'30min Z2 progressivo. Cadência 85–90rpm. Eleve a FC gradualmente.'},{nome:'Bloco Principal',desc:'3× 5min Z4 (esforço forte, controlável). Entre cada: 5min Z1 pedalando suave. Não pare completamente — a recuperação ativa é parte do estímulo.'},{nome:'Volta à Calma',desc:'15min Z1/Z2. Spinning leve.'}],dica:'Z4 = você consegue falar apenas palavras soltas. Se consegue frases, está em Z3. Se não consegue nada, está em Z5.'},
+  's1_qua':{tag:'S1 · Quarta 10/jun',title:'Endurance Z2 Puro',objetivo:'Construir base aeróbica mitocondrial. O Z2 é onde acontece a maior parte das adaptações de longo prazo — densidade mitocondrial, capilarização, eficiência de oxidação de gordura.',estrutura:[{nome:'Sessão Completa',desc:'1h30 Z2 contínuo. Terreno plano ou levemente ondulado. Cadência 85–95rpm. A conversa deve ser fluida e sem pausar para respirar.'}],dica:'Regra do Z2: você deve conseguir cantar ou contar uma história. Se não consegue, reduza a intensidade.'},
+  's1_qui':{tag:'S1 · Quinta 11/jun',title:'Subidas Z3 + Sprints Z5',objetivo:'Desenvolver potência em subidas e ativar o sistema anaeróbico alático (sprint curto). Combinação específica para o perfil de altimetria do Caminho da Fé.',estrutura:[{nome:'Aquecimento',desc:'30min Z2 progressivo.'},{nome:'Subidas Z3',desc:'4× 8min em subida Z3. Marcha que permita cadência 70–80rpm. Recuperação descendo em Z1.'},{nome:'Sprints Z5',desc:'4× 30seg sprint máximo com 3min Z1 entre cada. Terreno plano ou levemente inclinado.'},{nome:'Volta',desc:'20min Z1 spinning.'}],dica:'Os sprints de 30seg devem ser reais — saia do zero com tudo. Isso recria as aceleradas das saídas de curva e pedras do Caminho da Fé.'},
+  's1_sex':{tag:'S1 · Sexta 12/jun',title:'Z1 Flush',objetivo:'Limpar lactato e preparar as pernas para o long ride do sábado.',estrutura:[{nome:'Sessão',desc:'1h Z1/Z2. Ritmo de passeio. Nenhum esforço. Aumentar a circulação acelera a recuperação.'}],dica:'Se a FC não subir, não force. Hoje o objetivo é recuperação, não performance.'},
+  's1_sab':{tag:'S1 · Sábado 13/jun 🧪',title:'Long Ride Z2 com Altimetria',objetivo:'Construir resistência aeróbica com estímulo de altimetria + iniciar gut training com 50–60g/h.',estrutura:[{nome:'Duração',desc:'3h30'},{nome:'Perfil',desc:'Rota com 1.200–1.500m de ganho acumulado. Se não houver, use subidas repetidas.'},{nome:'Intensidade',desc:'85% Z2, 15% Z3 nas subidas mais íngremes.'}],nutricao:'GUT TRAINING: 50–60g carb/hora a partir de 45min. Use gel de maltodextrina (fonte de glicose) + bebida esportiva. Beba a cada 15–20min.',dica:'Registre o que comeu, quando, e como o estômago reagiu. Esses dados guiam as próximas semanas.'},
+  's1_dom':{tag:'S1 · Domingo 14/jun',title:'Back-to-Back Z2',objetivo:'Ensinar o corpo a render no segundo dia consecutivo — réplica direta do formato do Caminho da Fé.',estrutura:[{nome:'Sessão',desc:'2h Z2 com pernas carregadas do sábado. Isso é proposital. Aceite o ritmo mais baixo.'}],dica:'O back-to-back é onde você aprende a gerir energia com fadiga. Esta habilidade vale mais do que qualquer performance isolada.'},
+  's2_ter':{tag:'S2 · Terça 16/jun',title:'Tempo Intervals Z3',objetivo:'Elevar o limiar aeróbico. Intervalos Z3 longos são a base da capacidade de sustentar ritmo por horas — exatamente o que o Caminho da Fé exige.',estrutura:[{nome:'Estrutura',desc:'Aquec 20min Z2 → 3× 15min Z3 c/ 5min Z2 entre cada → 15min Z1. Cadência 80–90rpm.'}],dica:'Z3 = conversa limitada. Você consegue responder "sim" ou "não", não fazer perguntas completas.'},
+  's2_qua':{tag:'S2 · Quarta 17/jun',title:'Endurance Z2',objetivo:'Volume aeróbico. Base para os treinos mais intensos da semana.',estrutura:[{nome:'Sessão',desc:'2h Z2 constante. Terreno ondulado. Foco em pedalada eficiente e redonda.'}],dica:'Tente manter cadência 85–90rpm mesmo nas subidas. Use marchas mais leves se necessário.'},
+  's2_qui':{tag:'S2 · Quinta 18/jun',title:'30/30 VO₂Max Intro',objetivo:'Desenvolver potência aeróbica máxima. Os intervalos 30/30 são eficazes por produzirem alto estímulo de VO₂ de forma "tolerável" — útil na introdução.',estrutura:[{nome:'Aquecimento',desc:'30min Z2 progressivo.'},{nome:'Blocos 30/30',desc:'3 séries de 6 repetições: 30seg Z5 (máximo) / 30seg Z1 (muito leve). 5min Z1 entre cada série.'},{nome:'Volta',desc:'20min Z2.'}],dica:'Os 30seg de esforço devem ser máximos — você não consegue falar nada. A recuperação de 30seg é curta intencionalmente.'},
+  's2_sab':{tag:'S2 · Sábado 20/jun 🧪',title:'Long Ride Z2 + Subidas',objetivo:'Aumentar estímulo de altimetria e tempo em sela. Introduzir frutose no gut training para chegar a 60g/h com fontes mistas.',estrutura:[{nome:'Sessão',desc:'4h com ~1.500–1.800m ganho. 85% Z2, 15% Z3 nas subidas.'}],nutricao:'GUT TRAINING: 60g/h — adicionar fonte de frutose. Exemplo: gel 2:1 (maltodextrina + frutose) a cada 30min + bebida. Ou banana madura (frutose natural) + gel de glicose.',dica:'Se o estômago reagir bem com a frutose, ótimo. Se não, reduza para 50g/h e aumente mais devagar.'},
+  's2_dom':{tag:'S2 · Domingo 21/jun',title:'Back-to-Back Progressivo',objetivo:'Simular Day 2 com progressão de ritmo — treinar a gestão de energia com pernas carregadas.',estrutura:[{nome:'Sessão',desc:'2h30 com últimos 30min em Z3. Gestão de energia com pernas pesadas do sábado.'}],dica:'Se os últimos 30min em Z3 parecerem impossíveis, faça em Z2+. Progredir sem se destruir.'},
+  's3_ter':{tag:'S3 · Terça 23/jun',title:'Sweetspot 2× 20min',objetivo:'A zona de maior retorno por tempo investido. Sweetspot (88–93% FTP) treina o limiar aeróbico e o lactato simultaneamente, com custo de fadiga menor do que o limiar puro.',estrutura:[{nome:'Estrutura',desc:'Aquec 20min Z2 → 2× 20min sweetspot (esforço alto mas sustentável por 20min) c/ 5min Z2 → 15min Z1.'}],dica:'7 de 10 em esforço percebido. Você consegue falar palavras, não frases. Se tiver que parar antes dos 20min, reduza 5% a intensidade.'},
+  's3_qua':{tag:'S3 · Quarta 24/jun',title:'Z2 com Aceleradas',objetivo:'Desenvolver a capacidade de "abrir o gás" em situações inesperadas sem sair do ritmo aeróbico geral — réplica das pedras, buracos e subidas surpresa do Caminho da Fé.',estrutura:[{nome:'Sessão',desc:'1h45 Z2 com 6× 1min Z4 espaçados ao longo da rota. Após cada 1min Z4, volte ao Z2 o mais rápido possível.'}],dica:'O objetivo não é a acelerada, é a recuperação rápida de volta ao Z2. Isso é o que o evento vai exigir.'},
+  's3_qui':{tag:'S3 · Quinta 25/jun',title:'VO₂Max — 4× 4min (Protocolo Norueguês)',objetivo:'Protocolo mais validado cientificamente para elevação de VO₂Max (Helgerud et al., 2007). 4min é o tempo ideal para atingir e sustentar o VO₂Max.',estrutura:[{nome:'Aquecimento',desc:'30min Z2 progressivo.'},{nome:'Intervalos',desc:'4× 4min a 90–95% FCmax. Recuperação: 3min Z1 (pedalando suave, não parado) entre cada intervalo.'},{nome:'Volta',desc:'20min Z1.'}],dica:'A FC demora ~90seg para atingir o alvo. Normal não estar em 90% FCmax no início de cada intervalo. O alvo é atingir e manter no 3º e 4º min.'},
+  's3_sab':{tag:'S3 · Sábado 27/jun 🧪',title:'Long Ride Especial — Simulação',objetivo:'Primeira aproximação real da duração do evento. Testar nutrição 70g/h com fontes mistas e gear completo.',estrutura:[{nome:'Sessão',desc:'5h com 2.000–2.500m ganho. 80% Z2, 20% Z3. Use a bike/bags/gear exato do evento.'}],nutricao:'GUT TRAINING: 70g/h — gel 2:1 (contém ambos maltodextrina e frutose) a cada 25–30min + bebida com eletrólitos. Alvo: ~47g glicose + 23g frutose/hora.',dica:'Registre: o que você comeu e quando, como se sentiu na hora 3, hora 4, hora 5. Esses dados são críticos para ajustar o evento.'},
+  's3_dom':{tag:'S3 · Domingo 28/jun',title:'Back-to-Back Especial',objetivo:'Treinar a capacidade de sustentar Z3 no segundo dia consecutivo — simula o ritmo real do Dia 2 do evento.',estrutura:[{nome:'Estrutura',desc:'3h: 1ª hora Z2 leve → 1h30 Z3 moderado e constante → 30min Z2.'}],dica:'A janela Z3 no meio é a simulação do Dia 2 real. Aprender a manter Z3 com as pernas pesadas do sábado é o objetivo.'},
+  's4_ter':{tag:'S4 · Terça 30/jun',title:'Subidas Longas Z3–Z4',objetivo:'Desenvolver força resistência em subidas longas — específico para as rampas do Caminho da Fé.',estrutura:[{nome:'Estrutura',desc:'Aquec 30min Z2 → 5× 10min subida Z3/Z4 c/ descida como recuperação → 20min Z2.'}],dica:'Se não tiver subida longa, repita uma de 3–5min várias vezes. Mude a posição no guidão para variar o recrutamento muscular.'},
+  's4_qua':{tag:'S4 · Quarta 01/jul',title:'Z2 Recuperação Ativa',objetivo:'Permitir recuperação após a subida exigente de terça mantendo volume aeróbico.',estrutura:[{nome:'Sessão',desc:'2h Z2 estrito. Nenhuma acelerada. Foco em pedalada eficiente e cadência redonda.'}],dica:'Este treino parece "fácil demais". Isso é correto. A recuperação ativa é parte do processo de adaptação.'},
+  's4_qui':{tag:'S4 · Quinta 02/jul',title:'Sweetspot 3× 20min',objetivo:'Versão mais longa e exigente do sweetspot. 60min totais em zona alta é um estímulo poderoso de adaptação.',estrutura:[{nome:'Estrutura',desc:'Aquec 30min Z2 → 3× 20min sweetspot (88–93% FTP) c/ 5min Z2 entre cada → 15min Z1.'}],dica:'Se o 3º bloco parecer impossível, faça 15min. Nunca comprometa a forma técnica ou a cadência para "completar" — qualidade supera quantidade.'},
+  's4_sab':{tag:'S4 · Sábado 04/jul 🧪 SIMULAÇÃO',title:'Simulação Dia 1 — 6h',objetivo:'Maior aproximação do Dia 1 real até aqui. Testar 75g/h e validar o sistema de nutrição completo.',estrutura:[{nome:'Sessão',desc:'6h com 2.200–2.800m ganho. Ritmo de evento: nunca acelere até Z4 sem necessidade. Alimente a cada 25–30min. Gear completo: bags, mochila, roupas, luvas.'}],nutricao:'GUT TRAINING: 75g/h — 50g glicose + 25g frutose. Exemplo: gel 2:1 a cada 25min + bebida esportiva com frutose. A cada 25–30min, ativamente.',dica:'Anote o Tempo Total em Sela, km, ganho de elevação, e o que funcionou na nutrição. Esses números são seu benchmark.'},
+  's4_dom':{tag:'S4 · Domingo 05/jul 🧪 SIMULAÇÃO',title:'Simulação Dia 2 — 4h Fatigado',objetivo:'Reproduzir a condição real do Dia 2: pernas carregadas, mente cansada, ainda tendo que produzir.',estrutura:[{nome:'Sessão',desc:'4h com 1.500m ganho. Saia no mesmo horário que faria no Dia 2 do evento. Não descanse a mais do que faria no evento real.'}],nutricao:'GUT TRAINING: 75g/h. Priorize sólidos (barrinha, banana, tâmara) no início da etapa quando o estômago está mais tolerante, e gel/líquido no final quando a tolerância cai.',dica:'Se tiver crise no meio do treino — ótimo. Você aprenderá como lidar antes do evento. Esse é o objetivo do treino.'},
+  's6_ter':{tag:'S6 · Terça 14/jul',title:'Subidas Cadência Baixa — Força',objetivo:'Desenvolver força muscular específica. Cadência baixa (50–60rpm) em Z4 recruta fibras musculares de forma diferente, construindo potência bruta para as rampas longas do Caminho da Fé.',estrutura:[{nome:'Estrutura',desc:'Aquec 30min (últimos 5min em marcha pesada 60rpm) → 5× 6min subida 50–60rpm Z4 c/ descida recuperação → 15min Z2.'}],dica:'Esse treino cansa muito mais as pernas do que parece. Normal sentir dor muscular intensa nos dias seguintes — são fibras recrutadas de forma diferente.'},
+  's6_qua':{tag:'S6 · Quarta 15/jul',title:'Z2 + Aceleradas Z4',objetivo:'Combinar volume aeróbico com estímulos de potência. Treina a transição metabólica — a capacidade de acelerar e voltar ao Z2 rapidamente.',estrutura:[{nome:'Sessão',desc:'1h30 Z2 + 8× 45seg Z4 espaçados. Cadência alta 90+rpm nos trechos Z2. Após cada acelerada, voltar ao Z2 em <3min.'}],dica:'O objetivo principal é a velocidade de recuperação após cada acelerada. Isso treina a resiliência aeróbica.'},
+  's6_qui':{tag:'S6 · Quinta 16/jul',title:'VO₂Max 5× 4min',objetivo:'Versão expandida do protocolo norueguês. 5 intervalos aumentam o volume total de estímulo de VO₂Max.',estrutura:[{nome:'Estrutura',desc:'Aquec 30min → 5× 4min a 90–95% FCmax c/ 3min Z1 entre cada → 20min Z1.'}],dica:'Se o 5º intervalo não atingir 90% FCmax com qualidade, pare em 4. Qualidade do estímulo > número de repetições.'},
+  's6_sab':{tag:'S6 · Sábado 18/jul 🧪',title:'Long Ride Intenso',objetivo:'Combinar volume longo com trechos de intensidade — replica a realidade do Caminho da Fé. Gut training: 80g/h.',estrutura:[{nome:'Sessão',desc:'5h30 c/ 2.000m+. 70% Z2, 20% Z3, 10% Z4 em subidas-chave identificadas antes. Não pare nas rampas.'}],nutricao:'GUT TRAINING: 80g/h — 53g glicose + 27g frutose/hora. A cada 25min ativamente.',dica:'Identifique 3–4 subidas-chave antes de sair. Nelas, você vai a Z4. Nas demais, Z2 estrito. Pratique a decisão de quando forçar e quando poupar.'},
+  's6_dom':{tag:'S6 · Domingo 19/jul',title:'Back-to-Back Z2',objetivo:'Construir resiliência para o 2º dia após um long ride exigente de 5h30.',estrutura:[{nome:'Sessão',desc:'3h Z2 com pernas pesadas de sábado. Aceite o ritmo mais baixo. Completar é o objetivo.'}],dica:'Este back-to-back após 5h30 é o segundo maior bloco de carga do plano. Completá-lo dá uma confiança enorme para o evento real.'},
+  's7_ter':{tag:'S7 · Terça 21/jul',title:'Sweetspot 2× 30min',objetivo:'Maior volume de sweetspot do plano. 60min totais em zona alta em dois blocos de 30min.',estrutura:[{nome:'Estrutura',desc:'Aquec 20min Z2 → 2× 30min sweetspot c/ 10min Z2 → 20min Z1.'}],dica:'O 2º bloco de 30min será muito mais difícil. Não pause — reduza a intensidade levemente se necessário, mas mantenha o esforço contínuo.'},
+  's7_qua':{tag:'S7 · Quarta 22/jul',title:'Z2 + 10× 20seg Sprint',objetivo:'Ativar o sistema neuromuscular e alático. Sprints de 20seg são anaeróbicos alácticos — desenvolvem potência de pico sem acumular lactato excessivo.',estrutura:[{nome:'Sessão',desc:'1h45 Z2 + 10× 20seg sprint máximo c/ 3min Z2 entre cada. Os sprints devem ser o máximo absoluto.'}],dica:'Não faça os sprints "quase máximos". Eles devem ser máximos. Isso é o que diferencia o estímulo neuromuscular.'},
+  's7_qui':{tag:'S7 · Quinta 23/jul',title:'VO₂Max 5× 5min',objetivo:'Pico de estimulação aeróbica máxima. 5min é tempo suficiente para atingir e manter o VO₂Max por mais tempo do que os 4min anteriores.',estrutura:[{nome:'Estrutura',desc:'Aquec 30min → 5× 5min a 90–95% FCmax c/ 5min Z1 entre cada → 15min Z1.'}],dica:'5min de Z5 é difícil. Se chegar ao 4º intervalo sem qualidade, faça 4. Esta é a sessão de VO₂ mais exigente do plano.'},
+  's7_sab':{tag:'S7 · Sábado 25/jul 🧪 SIMULAÇÃO MÁXIMA',title:'Simulação Máxima Dia 1 — 7h',objetivo:'A maior simulação do plano. Validação final do sistema de nutrição 90g/h e do gear completo.',estrutura:[{nome:'Sessão',desc:'7h com 3.000m+ ganho. Ritmo de prova real. Sair às 5–6h. Gear completo. Tudo como no evento.'}],nutricao:'GUT TRAINING: 90g/h — 60g glicose + 30g frutose. Gel 2:1 a cada 20–25min + bebida. Não espere sentir fome.',dica:'Após completar 7h: você está pronto para o Caminho da Fé. Esta sessão é a prova final de que seu corpo aguenta.'},
+  's7_dom':{tag:'S7 · Domingo 26/jul 🧪 SIMULAÇÃO MÁXIMA',title:'Simulação Máxima Dia 2 — 4h30',objetivo:'Simular o estado real do Dia 2: corpo fatigado após o maior esforço já realizado. Aprender a gerir intensidade sob fadiga.',estrutura:[{nome:'Sessão',desc:'4h30 c/ 1.500m+ ganho. Sair no mesmo horário do evento. Gerir o ritmo com pernas pesadas.'}],nutricao:'GUT TRAINING: 90g/h. Após esta sessão: recuperação imediata com 1–1,2g carb/kg na 1ª hora + proteína (20–30g).',dica:'Após completar isso: você já fez o Caminho da Fé no treino. O real será diferente, mas você sabe que o corpo aguenta.'}
+};
+
+function openModal(key){
+  const s=sessions[key];
+  if(!s)return;
+  document.getElementById('modal-tag').textContent=s.tag;
+  document.getElementById('modal-title').textContent=s.title;
+  let html='';
+  html+=`<div class="modal-section"><h4>Objetivo</h4><p>${s.objetivo}</p></div>`;
+  html+=`<div class="modal-section"><h4>Estrutura da Sessão</h4>`;
+  s.estrutura.forEach(e=>{html+=`<div class="interval-block"><strong>${e.nome}</strong>${e.desc}</div>`;});
+  html+=`</div>`;
+  if(s.nutricao){html+=`<div class="modal-section"><h4>🧪 Nutrição / Gut Training</h4><div class="nutrition-block">${s.nutricao}</div></div>`;}
+  html+=`<div class="modal-section"><h4>Dica de Coach</h4><p>${s.dica}</p></div>`;
+  document.getElementById('modal-body').innerHTML=html;
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal(){document.getElementById('modal').classList.remove('open');}
+function closeModalOverlay(e){if(e.target===document.getElementById('modal'))closeModal();}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
+</script>
+</body>
+</html>
