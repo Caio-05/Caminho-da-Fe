@@ -1,4 +1,681 @@
-<!-- TABELA NUTRIÇÃO DO EVENTO -->
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Caminho da Fé · Plano de Treinamento</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --terra:#8B4513;--terra-light:#C4703B;--terra-dark:#5C2D0A;
+    --ouro:#D4A853;--ouro-light:#F0C878;
+    --verde:#2D5016;--verde-light:#4A7A28;
+    --creme:#F5EDD8;--creme-dark:#E8D9B8;
+    --cinza:#3A3228;--branco:#FDFAF4;
+    --zona1:#6BAED6;--zona2:#74C476;--zona3:#FD8D3C;--zona4:#E6550D;--zona5:#A63603;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body{background:var(--cinza);color:var(--creme);font-family:'DM Mono',monospace;min-height:100vh;overflow-x:hidden;}
+
+  /* HERO */
+  .hero{position:relative;background:var(--terra-dark);padding:56px 40px 36px;overflow:hidden;border-bottom:3px solid var(--ouro);}
+  .hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 80% 20%,rgba(212,168,83,.15) 0%,transparent 50%),radial-gradient(ellipse at 10% 80%,rgba(139,69,19,.3) 0%,transparent 40%);}
+  .mountain-svg{position:absolute;right:-20px;bottom:0;opacity:.08;width:380px;}
+  .hero-tag{font-size:10px;letter-spacing:4px;text-transform:uppercase;color:var(--ouro);margin-bottom:14px;display:flex;align-items:center;gap:12px;position:relative;}
+  .hero-tag::before{content:'';display:block;width:32px;height:1px;background:var(--ouro);}
+  .hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(48px,8vw,90px);line-height:.9;color:var(--branco);position:relative;letter-spacing:2px;}
+  .hero h1 span{color:var(--ouro);display:block;}
+  .hero-meta{display:flex;gap:36px;margin-top:28px;flex-wrap:wrap;position:relative;}
+  .meta-item{display:flex;flex-direction:column;gap:3px;}
+  .meta-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ouro);opacity:.7;}
+  .meta-value{font-family:'Crimson Pro',serif;font-size:19px;color:var(--creme);font-weight:600;}
+
+  /* BANNER DATA */
+  .date-banner{background:rgba(212,168,83,.12);border-top:1px solid rgba(212,168,83,.25);border-bottom:1px solid rgba(212,168,83,.25);padding:10px 40px;display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+  .date-badge{background:var(--ouro);color:var(--cinza);padding:3px 10px;border-radius:2px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;}
+  .date-text{font-size:11px;color:var(--creme-dark);opacity:.8;}
+  .date-note{font-size:10px;color:var(--ouro);opacity:.7;margin-left:auto;}
+
+  /* CONTAINER */
+  .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+  /* SECTION HEADER */
+  .section-header{padding:36px 0 20px;display:flex;align-items:baseline;gap:18px;}
+  .section-num{font-family:'Bebas Neue',sans-serif;font-size:60px;color:var(--ouro);opacity:.22;line-height:1;}
+  .section-title{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:3px;color:var(--creme-dark);}
+
+  /* CARDS */
+  .card{background:rgba(245,237,216,.05);border:1px solid rgba(212,168,83,.2);border-radius:4px;padding:22px;margin-bottom:14px;}
+
+  /* EVENT GRID */
+  .event-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;}
+  .day-card{background:rgba(139,69,19,.2);border:1px solid rgba(196,112,59,.4);border-radius:4px;padding:22px;position:relative;overflow:hidden;}
+  .day-card::before{content:attr(data-day);position:absolute;top:-10px;right:12px;font-family:'Bebas Neue',sans-serif;font-size:76px;color:var(--terra-light);opacity:.12;line-height:1;}
+  .day-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ouro);margin-bottom:10px;}
+  .stat-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid rgba(245,237,216,.08);}
+  .stat-row:last-child{border-bottom:none;}
+  .stat-name{font-size:11px;color:var(--creme-dark);opacity:.7;}
+  .stat-val{font-size:13px;color:var(--ouro-light);font-weight:500;}
+
+  /* ZONES */
+  .zones-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;margin-bottom:28px;}
+  .zone-card{padding:14px 10px;border-radius:4px;text-align:center;position:relative;overflow:hidden;}
+  .zone-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;}
+  .z1{background:rgba(107,174,214,.15);border:1px solid rgba(107,174,214,.3);}
+  .z1::after{background:var(--zona1);}
+  .z2{background:rgba(116,196,118,.15);border:1px solid rgba(116,196,118,.3);}
+  .z2::after{background:var(--zona2);}
+  .z3{background:rgba(253,141,60,.15);border:1px solid rgba(253,141,60,.3);}
+  .z3::after{background:var(--zona3);}
+  .z4{background:rgba(230,85,13,.15);border:1px solid rgba(230,85,13,.3);}
+  .z4::after{background:var(--zona4);}
+  .z5{background:rgba(166,54,3,.15);border:1px solid rgba(166,54,3,.3);}
+  .z5::after{background:var(--zona5);}
+  .zone-num{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;}
+  .z1 .zone-num{color:var(--zona1);}
+  .z2 .zone-num{color:var(--zona2);}
+  .z3 .zone-num{color:var(--zona3);}
+  .z4 .zone-num{color:var(--zona4);}
+  .z5 .zone-num{color:var(--zona5);}
+  .zone-name{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--creme-dark);opacity:.6;margin:3px 0;}
+  .zone-fc{font-size:11px;color:var(--creme-dark);opacity:.8;}
+  .zone-desc{font-size:9px;color:var(--creme-dark);opacity:.5;margin-top:3px;line-height:1.4;}
+
+  /* GUT TRAINING CARD */
+  .gut-card{background:rgba(116,196,118,.07);border:1px solid rgba(116,196,118,.25);border-radius:4px;padding:20px 24px;margin-bottom:24px;}
+  .gut-card h3{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:2px;color:#74C476;margin-bottom:12px;}
+  .gut-timeline{display:flex;gap:0;margin-top:8px;overflow-x:auto;}
+  .gut-phase{flex:1;min-width:130px;padding:12px 14px;border-right:1px solid rgba(116,196,118,.2);}
+  .gut-phase:last-child{border-right:none;}
+  .gut-phase-label{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#74C476;opacity:.7;margin-bottom:6px;}
+  .gut-phase-week{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--creme);margin-bottom:4px;}
+  .gut-phase-val{font-size:13px;color:var(--ouro-light);font-weight:500;}
+  .gut-phase-note{font-size:10px;color:var(--creme-dark);opacity:.55;margin-top:4px;line-height:1.4;}
+
+  /* TABS */
+  .weeks-nav{display:flex;gap:0;overflow-x:auto;border-bottom:2px solid rgba(212,168,83,.2);}
+  .week-tab{padding:11px 18px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--creme-dark);opacity:.5;cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .2s;user-select:none;background:none;border-left:none;border-right:none;border-top:none;}
+  .week-tab:hover{opacity:.8;}
+  .week-tab.active{opacity:1;color:var(--ouro);border-bottom-color:var(--ouro);}
+  .week-tab.rec-tab.active{color:var(--zona1);border-bottom-color:var(--zona1);}
+  .week-tab.event-week{color:var(--terra-light) !important;opacity:.7;}
+  .week-tab.event-week.active{opacity:1;border-bottom-color:var(--terra-light);}
+
+  /* PROGRESS STRIP */
+  .progress-strip{display:flex;gap:3px;margin-bottom:0;padding-bottom:0;}
+  .prog-week{flex:1;height:4px;border-radius:2px;opacity:.4;transition:opacity .2s;cursor:pointer;}
+  .prog-week:hover,.prog-week.active{opacity:1;}
+  .prog-vol{background:var(--zona2);}
+  .prog-int{background:var(--zona4);}
+  .prog-peak{background:var(--zona5);}
+  .prog-taper{background:var(--ouro);}
+  .prog-event{background:var(--terra-light);}
+  .prog-rec{background:var(--zona1);}
+
+  /* WEEK CONTENT */
+  .week-content{display:none;padding:22px 0;}
+  .week-content.active{display:block;}
+  .week-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:14px;}
+  .week-title-block h2{font-family:'Bebas Neue',sans-serif;font-size:30px;color:var(--creme);letter-spacing:2px;}
+  .week-title-block .week-dates{font-size:11px;color:var(--ouro);opacity:.7;margin-top:3px;letter-spacing:1px;}
+  .week-title-block p{font-family:'Crimson Pro',serif;font-style:italic;font-size:15px;color:var(--ouro);opacity:.8;margin-top:4px;}
+  .week-badges{display:flex;gap:7px;flex-wrap:wrap;}
+  .badge{padding:5px 12px;border-radius:2px;font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:500;}
+  .badge-vol{background:rgba(116,196,118,.2);border:1px solid rgba(116,196,118,.4);color:#74C476;}
+  .badge-int{background:rgba(230,85,13,.2);border:1px solid rgba(230,85,13,.4);color:#FD8D3C;}
+  .badge-rec{background:rgba(107,174,214,.2);border:1px solid rgba(107,174,214,.4);color:#6BAED6;}
+  .badge-taper{background:rgba(212,168,83,.2);border:1px solid rgba(212,168,83,.4);color:var(--ouro);}
+  .badge-peak{background:rgba(166,54,3,.2);border:1px solid rgba(166,54,3,.4);color:#E6550D;}
+  .badge-gut{background:rgba(116,196,118,.12);border:1px solid rgba(116,196,118,.3);color:#74C476;}
+
+  /* SCHEDULE */
+  .schedule{display:flex;flex-direction:column;gap:7px;}
+  .day-row{display:grid;grid-template-columns:88px 105px 1fr auto;background:rgba(245,237,216,.03);border:1px solid rgba(245,237,216,.08);border-radius:3px;overflow:hidden;transition:border-color .2s;cursor:default;}
+  .day-row.clickable{cursor:pointer;}
+  .day-row:hover.clickable{border-color:rgba(212,168,83,.3);}
+  .day-row.rest{opacity:.48;}
+  .day-row.key-session{border-color:rgba(212,168,83,.3);background:rgba(212,168,83,.05);}
+  .day-row.event-day{border-color:rgba(196,112,59,.6);background:rgba(139,69,19,.2);}
+  .day-row.gut-day{border-color:rgba(116,196,118,.35);background:rgba(116,196,118,.06);}
+  .cell-day{padding:13px 14px;font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--creme-dark);opacity:.5;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;border-right:1px solid rgba(245,237,216,.06);gap:2px;}
+  .cell-day .day-date{font-size:9px;opacity:.6;letter-spacing:1px;}
+  .cell-duration{padding:13px 14px;display:flex;align-items:center;border-right:1px solid rgba(245,237,216,.06);flex-shrink:0;}
+  .duration-pill{font-family:'Bebas Neue',sans-serif;font-size:17px;letter-spacing:1px;color:var(--ouro-light);}
+  .cell-main{padding:13px 18px;display:flex;flex-direction:column;justify-content:center;gap:3px;min-width:0;}
+  .session-name{font-family:'Crimson Pro',serif;font-size:15px;color:var(--creme);font-weight:600;}
+  .session-desc{font-size:11px;color:var(--creme-dark);opacity:.6;line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+  .session-nutrition{font-size:10px;color:#74C476;opacity:.8;margin-top:2px;}
+  .cell-zones{padding:13px 14px;display:flex;align-items:center;gap:4px;flex-shrink:0;}
+  .zone-dot{width:7px;height:7px;border-radius:50%;opacity:.8;}
+  .zd1{background:var(--zona1);}.zd2{background:var(--zona2);}.zd3{background:var(--zona3);}.zd4{background:var(--zona4);}.zd5{background:var(--zona5);}
+
+  /* WEEK TOTALS */
+  .week-totals{display:flex;gap:24px;margin-top:18px;padding-top:18px;border-top:1px solid rgba(212,168,83,.15);flex-wrap:wrap;}
+  .total-item{display:flex;flex-direction:column;gap:2px;}
+  .total-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--ouro);opacity:.6;}
+  .total-value{font-family:'Bebas Neue',sans-serif;font-size:21px;color:var(--creme);letter-spacing:1px;}
+
+  /* NOTES */
+  .notes-section{margin-top:18px;padding:14px 18px;background:rgba(212,168,83,.06);border-left:3px solid var(--ouro);border-radius:0 4px 4px 0;}
+  .notes-section h4{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ouro);margin-bottom:8px;}
+  .notes-section ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .notes-section li{font-size:11px;color:var(--creme-dark);opacity:.8;padding-left:14px;position:relative;line-height:1.5;}
+  .notes-section li::before{content:'→';position:absolute;left:0;color:var(--ouro);opacity:.5;}
+  .notes-section.green{background:rgba(116,196,118,.06);border-left-color:#74C476;}
+  .notes-section.green h4{color:#74C476;}
+  .notes-section.green li::before{color:#74C476;}
+
+  /* NUTRITION TABLE */
+  .nut-table{width:100%;border-collapse:collapse;margin-top:10px;font-size:11px;}
+  .nut-table th{text-align:left;padding:6px 12px;background:rgba(212,168,83,.1);color:var(--ouro);font-size:9px;letter-spacing:2px;text-transform:uppercase;border-bottom:1px solid rgba(212,168,83,.2);}
+  .nut-table td{padding:7px 12px;border-bottom:1px solid rgba(245,237,216,.06);color:var(--creme-dark);opacity:.8;}
+  .nut-table tr:last-child td{border-bottom:none;}
+  .nut-table td.highlight{color:var(--ouro-light);font-weight:500;}
+
+  /* MODAL */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(58,50,40,.92);z-index:100;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
+  .modal-overlay.open{display:flex;}
+  .modal{background:var(--cinza);border:1px solid rgba(212,168,83,.3);border-radius:6px;width:100%;max-width:560px;max-height:85vh;overflow-y:auto;}
+  .modal-header{padding:22px 26px 14px;border-bottom:1px solid rgba(212,168,83,.15);display:flex;justify-content:space-between;align-items:flex-start;}
+  .modal-close{background:none;border:none;color:var(--creme-dark);opacity:.5;cursor:pointer;font-size:20px;line-height:1;padding:0;transition:opacity .2s;}
+  .modal-close:hover{opacity:1;}
+  .modal-body{padding:22px 26px;}
+  .modal-section{margin-bottom:18px;}
+  .modal-section h4{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ouro);margin-bottom:8px;opacity:.7;}
+  .modal-section p{font-family:'Crimson Pro',serif;font-size:15px;color:var(--creme-dark);line-height:1.7;}
+  .interval-block{background:rgba(245,237,216,.05);border:1px solid rgba(245,237,216,.1);border-radius:3px;padding:10px 14px;margin:5px 0;font-size:11px;color:var(--creme-dark);line-height:1.6;}
+  .interval-block strong{color:var(--ouro-light);display:block;margin-bottom:3px;}
+  .nutrition-block{background:rgba(116,196,118,.08);border:1px solid rgba(116,196,118,.25);border-radius:3px;padding:10px 14px;margin:5px 0;font-size:11px;color:var(--creme-dark);line-height:1.6;}
+  .nutrition-block strong{color:#74C476;display:block;margin-bottom:3px;}
+
+  /* FOOTER */
+  .footer{padding:44px 40px 28px;border-top:1px solid rgba(212,168,83,.15);margin-top:36px;}
+  .footer-tag{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--ouro);opacity:.5;margin-bottom:10px;}
+  .footer-note{font-family:'Crimson Pro',serif;font-style:italic;font-size:14px;color:var(--creme-dark);opacity:.6;max-width:600px;line-height:1.7;}
+
+  @media(max-width:640px){
+    .event-grid{grid-template-columns:1fr;}
+    .zones-grid{grid-template-columns:repeat(3,1fr);}
+    .day-row{grid-template-columns:60px 76px 1fr;}
+    .cell-zones{display:none;}
+    .hero{padding:36px 16px 26px;}
+    .container{padding:0 14px;}
+    .week-tab{padding:9px 12px;font-size:9px;}
+    .gut-timeline{flex-direction:column;}
+    .gut-phase{border-right:none;border-bottom:1px solid rgba(116,196,118,.2);}
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <svg class="mountain-svg" viewBox="0 0 400 200" fill="none"><path d="M0 200 L80 60 L130 110 L200 20 L280 90 L330 50 L400 200 Z" fill="white"/></svg>
+  <div class="container" style="position:relative">
+    <div class="hero-tag">Plano de Treinamento Profissional · MTB · v2.0 Científico</div>
+    <h1>Caminho<span>da Fé</span></h1>
+    <div class="hero-meta">
+      <div class="meta-item"><span class="meta-label">Distância Total</span><span class="meta-value">300 km</span></div>
+      <div class="meta-item"><span class="meta-label">Altimetria Total</span><span class="meta-value">8.500 m ↑</span></div>
+      <div class="meta-item"><span class="meta-label">Início do Plano</span><span class="meta-value">8 Jun 2026</span></div>
+      <div class="meta-item"><span class="meta-label">Evento Alvo</span><span class="meta-value">~16 Ago 2026</span></div>
+      <div class="meta-item"><span class="meta-label">Semanas de Prep</span><span class="meta-value">10 semanas</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- DATE BANNER -->
+<div class="date-banner">
+  <span class="date-badge">Data confirmada</span>
+  <span class="date-text">Início: Segunda-feira, 8 de junho de 2026 · Evento-alvo: ~16 de agosto de 2026</span>
+  <span class="date-note">⚠ Quando confirmar a data exata, o taper será ajustado</span>
+</div>
+
+<div class="container">
+
+  <!-- 01 ANÁLISE DO EVENTO -->
+  <div class="section-header"><span class="section-num">01</span><span class="section-title">Análise do Evento</span></div>
+  <div class="event-grid">
+    <div class="day-card" data-day="D1">
+      <div class="day-label">Dia 1 — Águas da Prata → Ponto Médio</div>
+      <div>
+        <div class="stat-row"><span class="stat-name">Distância</span><span class="stat-val">160 km</span></div>
+        <div class="stat-row"><span class="stat-name">Elevação acumulada</span><span class="stat-val">4.500 m ↑</span></div>
+        <div class="stat-row"><span class="stat-name">Tempo estimado</span><span class="stat-val">8h – 10h em sela</span></div>
+        <div class="stat-row"><span class="stat-name">Intensidade alvo</span><span class="stat-val">Z2–Z3 predominante</span></div>
+        <div class="stat-row"><span class="stat-name">Carb necessário</span><span class="stat-val">~720–900g (90g/h)</span></div>
+        <div class="stat-row"><span class="stat-name">Hidratação</span><span class="stat-val">1–1,2 L/hora</span></div>
+      </div>
+    </div>
+    <div class="day-card" data-day="D2">
+      <div class="day-label">Dia 2 — Ponto Médio → Aparecida</div>
+      <div>
+        <div class="stat-row"><span class="stat-name">Distância</span><span class="stat-val">140 km</span></div>
+        <div class="stat-row"><span class="stat-name">Elevação acumulada</span><span class="stat-val">4.000 m ↑</span></div>
+        <div class="stat-row"><span class="stat-name">Tempo estimado</span><span class="stat-val">7h – 9h em sela</span></div>
+        <div class="stat-row"><span class="stat-name">Intensidade alvo</span><span class="stat-val">Z2–Z3 + finais Z4</span></div>
+        <div class="stat-row"><span class="stat-name">Carb necessário</span><span class="stat-val">~630–810g (90g/h)</span></div>
+        <div class="stat-row"><span class="stat-name">Desafio principal</span><span class="stat-val">Fadiga acumulada D1</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 02 ZONAS -->
+  <div class="section-header"><span class="section-num">02</span><span class="section-title">Zonas de Treinamento</span></div>
+  <div class="zones-grid">
+    <div class="zone-card z1"><div class="zone-num">Z1</div><div class="zone-name">Recuperação</div><div class="zone-fc">&lt;60% FCmax</div><div class="zone-desc">Pedal solto, regeneração ativa</div></div>
+    <div class="zone-card z2"><div class="zone-num">Z2</div><div class="zone-name">Base Aeróbica</div><div class="zone-fc">60–75% FCmax</div><div class="zone-desc">Conversa fácil, base de endurance</div></div>
+    <div class="zone-card z3"><div class="zone-num">Z3</div><div class="zone-name">Tempo / Limiar</div><div class="zone-fc">76–85% FCmax</div><div class="zone-desc">Esforço controlado, respiração exigida</div></div>
+    <div class="zone-card z4"><div class="zone-num">Z4</div><div class="zone-name">Limiar Anaeróbico</div><div class="zone-fc">86–95% FCmax</div><div class="zone-desc">Sweetspot–Threshold, minutos</div></div>
+    <div class="zone-card z5"><div class="zone-num">Z5</div><div class="zone-name">VO₂Max / Sprint</div><div class="zone-fc">&gt;95% FCmax</div><div class="zone-desc">Máximo esforço, 3–5 min</div></div>
+  </div>
+
+  <!-- 03 GUT TRAINING -->
+  <div class="section-header"><span class="section-num">03</span><span class="section-title">Protocolo de Gut Training</span></div>
+  <div class="gut-card">
+    <h3>🧪 Treinamento Intestinal Progressivo — Baseado em Evidência</h3>
+    <p style="font-size:12px;color:var(--creme-dark);opacity:.75;margin-bottom:14px;">
+      Sem gut training, o limite de absorção é ~60g carb/hora. Com treinamento específico, você chega a 90g/h usando fontes mistas (glicose + frutose 2:1) sem problemas gastrointestinais. Use os long rides como sessões de gut training — nunca estreie quantidade nova no evento.
+    </p>
+    <div class="gut-timeline">
+      <div class="gut-phase">
+        <div class="gut-phase-label">Fase 1</div>
+        <div class="gut-phase-week">S1 – S2</div>
+        <div class="gut-phase-val">50–60g/h</div>
+        <div class="gut-phase-note">Gel + bebida esportiva. Iniciar adaptação intestinal.</div>
+      </div>
+      <div class="gut-phase">
+        <div class="gut-phase-label">Fase 2</div>
+        <div class="gut-phase-week">S3 – S4</div>
+        <div class="gut-phase-val">60–75g/h</div>
+        <div class="gut-phase-note">Adicionar fonte de frutose (gel 2:1 ou banana + gel).</div>
+      </div>
+      <div class="gut-phase">
+        <div class="gut-phase-label">Fase 3</div>
+        <div class="gut-phase-week">S6 – S7</div>
+        <div class="gut-phase-val">75–90g/h</div>
+        <div class="gut-phase-note">Meta final. Glicose + frutose 2:1. Simular o evento.</div>
+      </div>
+      <div class="gut-phase">
+        <div class="gut-phase-label">Carb Loading</div>
+        <div class="gut-phase-week">D-2 e D-1</div>
+        <div class="gut-phase-val">10–12g/kg/dia</div>
+        <div class="gut-phase-note">Alto IG, baixa fibra. Ex: 75kg → 750–900g carb/dia.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 04 CRONOGRAMA -->
+  <div class="section-header"><span class="section-num">04</span><span class="section-title">Cronograma Semanal</span></div>
+
+  <!-- PROGRESS STRIP + TABS -->
+  <div class="progress-strip">
+    <div class="prog-week prog-vol active" onclick="showWeek(0)"></div>
+    <div class="prog-week prog-vol" onclick="showWeek(1)"></div>
+    <div class="prog-week prog-int" onclick="showWeek(2)"></div>
+    <div class="prog-week prog-peak" onclick="showWeek(3)"></div>
+    <div class="prog-week prog-rec" onclick="showWeek(4)"></div>
+    <div class="prog-week prog-int" onclick="showWeek(5)"></div>
+    <div class="prog-week prog-peak" onclick="showWeek(6)"></div>
+    <div class="prog-week prog-rec" onclick="showWeek(7)"></div>
+    <div class="prog-week prog-taper" onclick="showWeek(8)"></div>
+    <div class="prog-week prog-event" onclick="showWeek(9)"></div>
+  </div>
+  <div class="weeks-nav">
+    <button class="week-tab active" onclick="showWeek(0)">S1 · 8–14/jun</button>
+    <button class="week-tab" onclick="showWeek(1)">S2 · 15–21/jun</button>
+    <button class="week-tab" onclick="showWeek(2)">S3 · 22–28/jun</button>
+    <button class="week-tab" onclick="showWeek(3)">S4 · 29/jun–5/jul</button>
+    <button class="week-tab rec-tab" onclick="showWeek(4)">S5 · 6–12/jul ↻</button>
+    <button class="week-tab" onclick="showWeek(5)">S6 · 13–19/jul</button>
+    <button class="week-tab" onclick="showWeek(6)">S7 · 20–26/jul</button>
+    <button class="week-tab rec-tab" onclick="showWeek(7)">S8 · 27/jul–2/ago ↻</button>
+    <button class="week-tab" onclick="showWeek(8)">S9 · 3–9/ago</button>
+    <button class="week-tab event-week" onclick="showWeek(9)">S10 · ~16/ago 🏁</button>
+  </div>
+
+  <!-- ═══ SEMANA 1 ═══ -->
+  <div class="week-content active" id="week-0">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 1 — Construção de Base</h2>
+        <div class="week-dates">8 a 14 de junho de 2026</div>
+        <p>Aeróbico Z2 + primeiros estímulos Z4. Iniciar gut training com 50–60g/h.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-vol">Volume Base</span><span class="badge badge-gut">Gut 50–60g/h</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">Seg<span class="day-date">08/jun</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso Ativo</span><span class="session-desc">Caminhada 30 min ou alongamento — 1º dia do plano, chegue descansado</span></div><div class="cell-zones"></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s1_ter')"><div class="cell-day">Ter<span class="day-date">09/jun</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Endurance + Picos Z4</span><span class="session-desc">1h30 Z2 → 3× 5min Z4 c/ 5min Z1 entre → 15min Z2</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s1_qua')"><div class="cell-day">Qua<span class="day-date">10/jun</span></div><div class="cell-duration"><span class="duration-pill">1h30</span></div><div class="cell-main"><span class="session-name">Endurance Z2 Puro</span><span class="session-desc">1h30 Z2 estrito. Cadência 85–95 rpm. Terreno plano ou ondulado leve.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s1_qui')"><div class="cell-day">Qui<span class="day-date">11/jun</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Subidas Z3 + Sprints Z5</span><span class="session-desc">Aquec 30min → 4× 8min subida Z3 → 4× 30seg sprint Z5 → 20min Z1</span></div><div class="cell-zones"><div class="zone-dot zd3"></div><div class="zone-dot zd5"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s1_sex')"><div class="cell-day">Sex<span class="day-date">12/jun</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z1 Flush</span><span class="session-desc">1h Z1/Z2 levíssimo. Preparar pernas para o long de sábado.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div></div></div>
+      <div class="day-row key-session gut-day clickable" onclick="openModal('s1_sab')"><div class="cell-day">Sáb<span class="day-date">13/jun</span></div><div class="cell-duration"><span class="duration-pill">3h30</span></div><div class="cell-main"><span class="session-name">Long Ride Z2 + Altimetria 🧪</span><span class="session-desc">3h30 Z2 com 1.200–1.500m ganho. Rota técnica MTB.</span><span class="session-nutrition">Gut training: 50–60g carb/hora a partir de 45min (gel + bebida)</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s1_dom')"><div class="cell-day">Dom<span class="day-date">14/jun</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Back-to-Back Z2</span><span class="session-desc">2h Z2 com pernas carregadas do sábado. Isso é proposital.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Volume</span><span class="total-value">~12h</span></div>
+      <div class="total-item"><span class="total-label">Foco</span><span class="total-value">Base Z2</span></div>
+      <div class="total-item"><span class="total-label">Gut Training</span><span class="total-value">50–60g/h</span></div>
+    </div>
+    <div class="notes-section">
+      <h4>Notas da Semana 1</h4>
+      <ul>
+        <li>Gut training: use gel de maltodextrina + bebida esportiva (glicose + eletrólitos). Ainda sem frutose.</li>
+        <li>Z2 = você consegue falar frases completas sem pausar para respirar. Se não consegue, reduza.</li>
+        <li>Registre peso antes/depois dos long rides para calibrar perda hídrica.</li>
+        <li>Anote o que comeu e quando, e como o estômago reagiu — esses dados guiam as próximas semanas.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ SEMANA 2 ═══ -->
+  <div class="week-content" id="week-1">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 2 — Carga Progressiva</h2>
+        <div class="week-dates">15 a 21 de junho de 2026</div>
+        <p>Long ride mais longo. Introdução dos intervalos 30/30 VO₂. Gut training sobe para 60g/h.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-vol">Volume +</span><span class="badge badge-int">VO₂ Intro</span><span class="badge badge-gut">Gut 60g/h</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">Seg<span class="day-date">15/jun</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso Total</span><span class="session-desc">Sono prioritário. Mobilidade opcional.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s2_ter')"><div class="cell-day">Ter<span class="day-date">16/jun</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Tempo Intervals Z3</span><span class="session-desc">Aquec 20min → 3× 15min Z3 c/ 5min Z2 → 15min Z1. Cadência 80–90rpm.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s2_qua')"><div class="cell-day">Qua<span class="day-date">17/jun</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Endurance Z2</span><span class="session-desc">2h Z2 constante. Terreno ondulado. Foco em eficiência da pedalada.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s2_qui')"><div class="cell-day">Qui<span class="day-date">18/jun</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">30/30 VO₂Max Intro</span><span class="session-desc">Aquec 30min → 3 séries de 6× (30seg Z5 / 30seg Z1) c/ 5min Z1 → 20min Z2</span></div><div class="cell-zones"><div class="zone-dot zd4"></div><div class="zone-dot zd5"></div></div></div>
+      <div class="day-row"><div class="cell-day">Sex<span class="day-date">19/jun</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z1 de Transição</span><span class="session-desc">Pedal muito leve. Pernas soltas para o fim de semana.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div></div></div>
+      <div class="day-row key-session gut-day clickable" onclick="openModal('s2_sab')"><div class="cell-day">Sáb<span class="day-date">20/jun</span></div><div class="cell-duration"><span class="duration-pill">4h</span></div><div class="cell-main"><span class="session-name">Long Ride Z2 + Subidas 🧪</span><span class="session-desc">4h com ~1.500–1.800m ganho. 85% Z2, 15% Z3 nas subidas.</span><span class="session-nutrition">Gut training: 60g/h — adicionar fonte de frutose (gel 2:1 ou banana)</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s2_dom')"><div class="cell-day">Dom<span class="day-date">21/jun</span></div><div class="cell-duration"><span class="duration-pill">2h30</span></div><div class="cell-main"><span class="session-name">Back-to-Back Progressivo</span><span class="session-desc">2h30 com últimos 30min em Z3. Gestão de energia fatigado.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Volume</span><span class="total-value">~13h30</span></div>
+      <div class="total-item"><span class="total-label">Foco</span><span class="total-value">Tempo + VO₂</span></div>
+      <div class="total-item"><span class="total-label">Gut Training</span><span class="total-value">60g/h</span></div>
+    </div>
+    <div class="notes-section green">
+      <h4>🧪 Gut Training — Introdução da Frutose</h4>
+      <ul>
+        <li>A proporção ideal é 2:1 glicose:frutose — permite oxidação de até 90g/h vs 60g/h apenas com glicose.</li>
+        <li>Fontes práticas de frutose: gel maltodextrina+frutose, tâmaras, banana madura, bebida com frutose.</li>
+        <li>Se sentir desconforto GI, reduza para 50g/h e suba mais devagar na semana seguinte.</li>
+        <li>Anote: qual alimento, qual quantidade, qual hora, e como o estômago respondeu.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ SEMANA 3 ═══ -->
+  <div class="week-content" id="week-2">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 3 — Bloco de Intensidade</h2>
+        <div class="week-dates">22 a 28 de junho de 2026</div>
+        <p>Sweetspot + VO₂Max 4×4min (protocolo norueguês). Gut training sobe para 70g/h.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-int">Sweetspot</span><span class="badge badge-peak">VO₂ 4×4</span><span class="badge badge-gut">Gut 70g/h</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">Seg<span class="day-date">22/jun</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso</span><span class="session-desc">20 min mobilidade opcional.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s3_ter')"><div class="cell-day">Ter<span class="day-date">23/jun</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Sweetspot 2× 20min</span><span class="session-desc">Aquec 20min → 2× 20min sweetspot (88–93% FTP) c/ 5min Z2 → 15min Z1</span></div><div class="cell-zones"><div class="zone-dot zd3"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s3_qua')"><div class="cell-day">Qua<span class="day-date">24/jun</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Z2 com Aceleradas</span><span class="session-desc">1h45 Z2 com 6× 1min Z4 espalhados. Manter cadência alta no Z2.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s3_qui')"><div class="cell-day">Qui<span class="day-date">25/jun</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">VO₂Max — 4× 4min (Norueguês)</span><span class="session-desc">Aquec 30min → 4× 4min a 90–95% FCmax c/ 3min Z1 → 20min Z1</span></div><div class="cell-zones"><div class="zone-dot zd4"></div><div class="zone-dot zd5"></div></div></div>
+      <div class="day-row"><div class="cell-day">Sex<span class="day-date">26/jun</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z1 Flush</span><span class="session-desc">1h Z1/Z2 leve. Eliminar lactato. Preparar para o long de sábado.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div></div></div>
+      <div class="day-row key-session gut-day clickable" onclick="openModal('s3_sab')"><div class="cell-day">Sáb<span class="day-date">27/jun</span></div><div class="cell-duration"><span class="duration-pill">5h</span></div><div class="cell-main"><span class="session-name">LONG RIDE Especial — Simulação 🧪</span><span class="session-desc">5h com 2.000–2.500m ganho. 80% Z2, 20% Z3. Use o gear do evento.</span><span class="session-nutrition">Gut training: 70g/h — gel 2:1 + bebida com frutose. A cada 30–40min.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s3_dom')"><div class="cell-day">Dom<span class="day-date">28/jun</span></div><div class="cell-duration"><span class="duration-pill">3h</span></div><div class="cell-main"><span class="session-name">Back-to-Back Especial</span><span class="session-desc">3h: 1h Z2 → 1h30 Z3 → 30min Z2. Simula ritmo do Dia 2.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Volume</span><span class="total-value">~15h</span></div>
+      <div class="total-item"><span class="total-label">Foco</span><span class="total-value">Sweetspot + VO₂</span></div>
+      <div class="total-item"><span class="total-label">Gut Training</span><span class="total-value">70g/h</span></div>
+    </div>
+    <div class="notes-section">
+      <h4>Notas da Semana 3</h4>
+      <ul>
+        <li>VO₂Max 4×4: alvo é 90–95% FCmax no intervalo 3 e 4 — se não atingir no 1 e 2, normal, o coração demora para subir.</li>
+        <li>Sweetspot: 7 de 10 em esforço percebido. Você consegue falar palavras, não frases completas.</li>
+        <li>No long de sábado: carregue a mochila/bags que usará no Caminho da Fé.</li>
+        <li>Se sentir fadiga excessiva na sexta, esta semana foi pesada o suficiente — bom sinal.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ SEMANA 4 ═══ -->
+  <div class="week-content" id="week-3">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 4 — Pico de Volume</h2>
+        <div class="week-dates">29 de junho a 5 de julho de 2026</div>
+        <p>Maior volume do plano. Back-to-back de simulação máxima. Gut training: 75g/h.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-peak">Volume Peak</span><span class="badge badge-int">Sweetspot 3×20</span><span class="badge badge-gut">Gut 75g/h</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">Seg<span class="day-date">29/jun</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso Estratégico</span><span class="session-desc">Recuperação total. O descanso aqui é treinamento.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s4_ter')"><div class="cell-day">Ter<span class="day-date">30/jun</span></div><div class="cell-duration"><span class="duration-pill">2h30</span></div><div class="cell-main"><span class="session-name">Subidas Longas Z3–Z4</span><span class="session-desc">Aquec 30min → 5× 10min subida Z3/Z4 c/ descida Z1 → 20min Z2</span></div><div class="cell-zones"><div class="zone-dot zd3"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s4_qua')"><div class="cell-day">Qua<span class="day-date">01/jul</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Z2 Recuperação Ativa</span><span class="session-desc">2h Z2 estrito após terça exigente. Foco em pedalada redonda.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s4_qui')"><div class="cell-day">Qui<span class="day-date">02/jul</span></div><div class="cell-duration"><span class="duration-pill">2h30</span></div><div class="cell-main"><span class="session-name">Sweetspot 3× 20min</span><span class="session-desc">Aquec 30min → 3× 20min sweetspot c/ 5min Z2 → 15min Z1. Exigente.</span></div><div class="cell-zones"><div class="zone-dot zd3"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row"><div class="cell-day">Sex<span class="day-date">03/jul</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z1 Flush</span><span class="session-desc">1h muito leve. Pernas descansando para o maior back-to-back do plano.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div></div></div>
+      <div class="day-row key-session gut-day clickable" onclick="openModal('s4_sab')"><div class="cell-day">Sáb<span class="day-date">04/jul</span></div><div class="cell-duration"><span class="duration-pill">6h</span></div><div class="cell-main"><span class="session-name">SIMULAÇÃO DIA 1 — 6h 🧪</span><span class="session-desc">6h com 2.200–2.800m ganho. Ritmo de evento. Gear completo. Sair cedo.</span><span class="session-nutrition">Gut training: 75g/h — 50g glicose + 25g frutose/hora. A cada 30min.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+      <div class="day-row key-session gut-day clickable" onclick="openModal('s4_dom')"><div class="cell-day">Dom<span class="day-date">05/jul</span></div><div class="cell-duration"><span class="duration-pill">4h</span></div><div class="cell-main"><span class="session-name">SIMULAÇÃO DIA 2 — 4h Fatigado 🧪</span><span class="session-desc">4h com 1.500m ganho. Dia 2 simulado. Gerir energia com pernas pesadas.</span><span class="session-nutrition">Gut training: 75g/h. Priorizar sólidos no início, gel no final.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Volume</span><span class="total-value">~18h</span></div>
+      <div class="total-item"><span class="total-label">Foco</span><span class="total-value">Simulação Evento</span></div>
+      <div class="total-item"><span class="total-label">Gut Training</span><span class="total-value">75g/h</span></div>
+    </div>
+    <div class="notes-section">
+      <h4>Notas da Semana 4 — A mais importante até aqui</h4>
+      <ul>
+        <li>Back-to-back sáb/dom é o treino mais importante do plano inteiro. Complete-o.</li>
+        <li>No domingo, pernas pesadas são normais e intencionais — aprenda a pedalar fatigado.</li>
+        <li>Use exatamente a nutrição que pretende usar no Caminho da Fé.</li>
+        <li>Após esta semana vem recuperação obrigatória (S5) — não pule, é quando o corpo fica mais forte.</li>
+        <li>Anote tudo: o que funcionou na nutrição, o que não funcionou, qual gel tolerou melhor em 5h+.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ SEMANA 5 — RECUPERAÇÃO ═══ -->
+  <div class="week-content" id="week-4">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 5 — Recuperação Obrigatória</h2>
+        <div class="week-dates">6 a 12 de julho de 2026</div>
+        <p>Volume cai ~50%. O corpo absorve os estímulos das 4 semanas anteriores. Supercompensação.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-rec">Supercompensação</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">Seg<span class="day-date">06/jul</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso Total</span><span class="session-desc">Sem pedal. Foco em sono, alimentação proteica e recuperação muscular.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row"><div class="cell-day">Ter<span class="day-date">07/jul</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z1 Regenerativo</span><span class="session-desc">1h Z1 levíssimo. Nenhum esforço. Apenas girar as pernas.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div></div></div>
+      <div class="day-row"><div class="cell-day">Qua<span class="day-date">08/jul</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z2 Leve</span><span class="session-desc">1h Z2. Fácil, sem subidas forçadas.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+      <div class="day-row"><div class="cell-day">Qui<span class="day-date">09/jul</span></div><div class="cell-duration"><span class="duration-pill">1h30</span></div><div class="cell-main"><span class="session-name">Z2 + 3× 5min Z3</span><span class="session-desc">Manter o motor aquecido sem nova carga. 3 aceleradas curtas e controladas.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+      <div class="day-row rest"><div class="cell-day">Sex<span class="day-date">10/jul</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso</span><span class="session-desc">Corpo e mente descansando.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row"><div class="cell-day">Sáb<span class="day-date">11/jul</span></div><div class="cell-duration"><span class="duration-pill">2h30</span></div><div class="cell-main"><span class="session-name">Long Ride Leve</span><span class="session-desc">2h30 Z2. Sem pressão. Sentir as pernas voltando com frescor.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+      <div class="day-row"><div class="cell-day">Dom<span class="day-date">12/jul</span></div><div class="cell-duration"><span class="duration-pill">1h30</span></div><div class="cell-main"><span class="session-name">Z2 Passeio</span><span class="session-desc">1h30 sem compromisso de ritmo. Aproveitar.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Volume</span><span class="total-value">~8h</span></div>
+      <div class="total-item"><span class="total-label">Foco</span><span class="total-value">Supercompensação</span></div>
+      <div class="total-item"><span class="total-label">Intensidade</span><span class="total-value">Muito Baixa</span></div>
+    </div>
+    <div class="notes-section">
+      <h4>Por que a semana de recuperação é crítica</h4>
+      <ul>
+        <li>O corpo fica mais forte durante o descanso, não durante o treino. Cortar esta semana é contraproducente.</li>
+        <li>Proteína: consuma 1,6–2g/kg/dia para reparo muscular máximo.</li>
+        <li>Sono: 8h+ mínimo. A privação de sono reduz o ganho de performance em até 30%.</li>
+        <li>Se sentir frescor nas pernas na quinta → sinal excelente. Você está pronto para a Fase 2.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ SEMANA 6 ═══ -->
+  <div class="week-content" id="week-5">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 6 — Fase 2: Força Específica</h2>
+        <div class="week-dates">13 a 19 de julho de 2026</div>
+        <p>Retorno com intensidade. Força em subidas (cadência baixa). Gut training: 80g/h.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-peak">Força MTB</span><span class="badge badge-int">VO₂ Avançado</span><span class="badge badge-gut">Gut 80g/h</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">Seg<span class="day-date">13/jul</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso</span><span class="session-desc">Início da Fase 2. Descanse para entrar forte.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s6_ter')"><div class="cell-day">Ter<span class="day-date">14/jul</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Subidas Cadência Baixa (Força)</span><span class="session-desc">Aquec 30min → 5× 6min subida 50–60rpm Z4 c/ descida recuperação → 15min Z2</span></div><div class="cell-zones"><div class="zone-dot zd3"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s6_qua')"><div class="cell-day">Qua<span class="day-date">15/jul</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Z2 + Aceleradas Z4</span><span class="session-desc">1h30 Z2 + 8× 45seg Z4 espaçados. Cadência alta 90+rpm no Z2.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s6_qui')"><div class="cell-day">Qui<span class="day-date">16/jul</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">VO₂Max 5× 4min</span><span class="session-desc">Aquec 30min → 5× 4min a 90–95% FCmax c/ 3min Z1 → 20min Z1</span></div><div class="cell-zones"><div class="zone-dot zd4"></div><div class="zone-dot zd5"></div></div></div>
+      <div class="day-row"><div class="cell-day">Sex<span class="day-date">17/jul</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z1 Flush</span><span class="session-desc">Pedal flush. Pernas leves para sábado.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div></div></div>
+      <div class="day-row key-session gut-day clickable" onclick="openModal('s6_sab')"><div class="cell-day">Sáb<span class="day-date">18/jul</span></div><div class="cell-duration"><span class="duration-pill">5h30</span></div><div class="cell-main"><span class="session-name">Long Ride Intenso 🧪</span><span class="session-desc">5h30 c/ 2.000m+. 70% Z2, 20% Z3, 10% Z4 em subidas-chave.</span><span class="session-nutrition">Gut training: 80g/h — 53g glicose + 27g frutose/hora (2:1). A cada 25–30min.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s6_dom')"><div class="cell-day">Dom<span class="day-date">19/jul</span></div><div class="cell-duration"><span class="duration-pill">3h</span></div><div class="cell-main"><span class="session-name">Back-to-Back Z2</span><span class="session-desc">3h Z2 com pernas carregadas. Treinar resiliência do 2º dia.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Volume</span><span class="total-value">~15h30</span></div>
+      <div class="total-item"><span class="total-label">Foco</span><span class="total-value">Força Específica</span></div>
+      <div class="total-item"><span class="total-label">Gut Training</span><span class="total-value">80g/h</span></div>
+    </div>
+    <div class="notes-section">
+      <h4>Notas da Semana 6</h4>
+      <ul>
+        <li>Força (cadência baixa 50–60rpm em Z4): normal sentir dor muscular nos dias seguintes — são fibras recrutadas de forma diferente.</li>
+        <li>VO₂Max: 5 intervalos agora. Se não completar o 5º com qualidade, faça 4. Qualidade > quantidade.</li>
+        <li>Long Ride: identifique 3–4 subidas-chave no percurso onde vai dar 100%. Nas demais, Z2 estrito.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ SEMANA 7 ═══ -->
+  <div class="week-content" id="week-6">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 7 — Pico de Performance</h2>
+        <div class="week-dates">20 a 26 de julho de 2026</div>
+        <p>Semana mais intensa do plano. Simulação máxima: 7h + 4h30. Gut training: 90g/h.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-peak">Performance Peak</span><span class="badge badge-gut">Gut 90g/h ✓</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">Seg<span class="day-date">20/jul</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso Total</span><span class="session-desc">Semana mais dura vem aí. Descanse completamente.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s7_ter')"><div class="cell-day">Ter<span class="day-date">21/jul</span></div><div class="cell-duration"><span class="duration-pill">2h30</span></div><div class="cell-main"><span class="session-name">Sweetspot 2× 30min</span><span class="session-desc">Aquec 20min → 2× 30min sweetspot c/ 10min Z2 → 20min Z1. Teste de limiar.</span></div><div class="cell-zones"><div class="zone-dot zd3"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row clickable" onclick="openModal('s7_qua')"><div class="cell-day">Qua<span class="day-date">22/jul</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">Z2 + 10× 20seg Sprint</span><span class="session-desc">1h45 Z2 + 10× 20seg sprint máximo c/ 3min Z2. Ativa sistema neuromuscular.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd5"></div></div></div>
+      <div class="day-row key-session clickable" onclick="openModal('s7_qui')"><div class="cell-day">Qui<span class="day-date">23/jul</span></div><div class="cell-duration"><span class="duration-pill">2h</span></div><div class="cell-main"><span class="session-name">VO₂Max 5× 5min</span><span class="session-desc">Aquec 30min → 5× 5min a 90–95% FCmax c/ 5min Z1 → 15min Z1</span></div><div class="cell-zones"><div class="zone-dot zd4"></div><div class="zone-dot zd5"></div></div></div>
+      <div class="day-row rest"><div class="cell-day">Sex<span class="day-date">24/jul</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z1 Absoluto</span><span class="session-desc">Levíssimo. Guardar energia para o fim de semana mais importante.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div></div></div>
+      <div class="day-row key-session gut-day clickable" onclick="openModal('s7_sab')"><div class="cell-day">Sáb<span class="day-date">25/jul</span></div><div class="cell-duration"><span class="duration-pill">7h</span></div><div class="cell-main"><span class="session-name">SIMULAÇÃO MÁXIMA — DIA 1 (7h) 🧪</span><span class="session-desc">7h com 3.000m+ ganho. Ritmo de prova real. Sair às 5–6h. Gear completo.</span><span class="session-nutrition">Gut training: 90g/h — 60g glicose + 30g frutose/hora. A cada 20–25min.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row key-session gut-day clickable" onclick="openModal('s7_dom')"><div class="cell-day">Dom<span class="day-date">26/jul</span></div><div class="cell-duration"><span class="duration-pill">4h30</span></div><div class="cell-main"><span class="session-name">SIMULAÇÃO MÁXIMA — DIA 2 (4h30) 🧪</span><span class="session-desc">4h30 c/ 1.500m+ ganho. Mesmo horário do evento real. Gerir energia fatigado.</span><span class="session-nutrition">Gut training: 90g/h. Após esta sessão: você já fez o Caminho da Fé no treino.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Volume</span><span class="total-value">~19h</span></div>
+      <div class="total-item"><span class="total-label">Foco</span><span class="total-value">Peak + Simulação</span></div>
+      <div class="total-item"><span class="total-label">Gut Training</span><span class="total-value">90g/h ✓ Meta</span></div>
+    </div>
+    <div class="notes-section green">
+      <h4>🧪 Gut Training — Meta Atingida: 90g/h</h4>
+      <ul>
+        <li>Proporção final: 60g glicose (maltodextrina/gel) + 30g frutose por hora.</li>
+        <li>Fontes práticas: gel 2:1 (45g) a cada 30min + bebida com frutose, OU barra de tâmara + gel.</li>
+        <li>A cada 20–25min ativamente. Não espere sentir fome ou queda de energia.</li>
+        <li>Se o estômago tolerar bem aqui → você está pronto para o evento real.</li>
+        <li>Após a simulação de domingo: coma 1–1,2g carb/kg na 1ª hora (glicose + frutose) para recuperação rápida.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ SEMANA 8 — RECUPERAÇÃO II ═══ -->
+  <div class="week-content" id="week-7">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 8 — Recuperação II</h2>
+        <div class="week-dates">27 de julho a 2 de agosto de 2026</div>
+        <p>Absorção do bloco de pico. Volume cai drasticamente. Frescor chegando.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-rec">Recuperação</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">Seg<span class="day-date">27/jul</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso Total</span><span class="session-desc">Sem pedal. Caminhada, piscina, massagem. Eleve as pernas 20 min.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row"><div class="cell-day">Ter<span class="day-date">28/jul</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z1 Regenerativo</span><span class="session-desc">Pedal solto. Sem meta. 1h Z1.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div></div></div>
+      <div class="day-row"><div class="cell-day">Qua<span class="day-date">29/jul</span></div><div class="cell-duration"><span class="duration-pill">1h30</span></div><div class="cell-main"><span class="session-name">Z2 + 3× 3min Z4</span><span class="session-desc">Manutenção mínima de intensidade para não perder adaptações.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row"><div class="cell-day">Qui<span class="day-date">30/jul</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z2 Fácil</span><span class="session-desc">1h Z2. Leve e tranquilo.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+      <div class="day-row rest"><div class="cell-day">Sex<span class="day-date">31/jul</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso</span><span class="session-desc">Prepare o equipamento: revise a bike, bags, GPS, iluminação.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row"><div class="cell-day">Sáb<span class="day-date">01/ago</span></div><div class="cell-duration"><span class="duration-pill">2h30</span></div><div class="cell-main"><span class="session-name">Long Ride Leve</span><span class="session-desc">2h30 Z2. Algumas subidas sem forçar. Sentir pernas voltando.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+      <div class="day-row"><div class="cell-day">Dom<span class="day-date">02/ago</span></div><div class="cell-duration"><span class="duration-pill">1h30</span></div><div class="cell-main"><span class="session-name">Z2 Relaxado</span><span class="session-desc">1h30 passeio. Sem métricas. Sentir o corpo.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Volume</span><span class="total-value">~8h</span></div>
+      <div class="total-item"><span class="total-label">Foco</span><span class="total-value">Supercompensação</span></div>
+      <div class="total-item"><span class="total-label">Intensidade</span><span class="total-value">Muito Baixa</span></div>
+    </div>
+    <div class="notes-section">
+      <h4>Notas da Semana 8</h4>
+      <ul>
+        <li>A sensação de frescor que começa aqui não é destreinamento — é supercompensação. Confie no processo.</li>
+        <li>Prepare todo o equipamento do evento: bike revisada, corrente, freios, pneus, pressão ideal para MTB.</li>
+        <li>Confirme a logística: ponto de pernoite, abastecimento de alimentos na rota, horário de largada.</li>
+        <li>Se tiver data exata do evento agora → informe para ajustar o taper com precisão.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ SEMANA 9 — TAPER ═══ -->
+  <div class="week-content" id="week-8">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 9 — Taper / Afinação Final</h2>
+        <div class="week-dates">3 a 9 de agosto de 2026</div>
+        <p>Volume mínimo. Manter intensidade para não perder o tônus. Carb loading nos últimos 2 dias.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-taper">Taper</span><span class="badge badge-gut">Carb Load 10–12g/kg</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">Seg<span class="day-date">03/ago</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso Total</span><span class="session-desc">Não pedala. Descanse bem. Taper começou.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row"><div class="cell-day">Ter<span class="day-date">04/ago</span></div><div class="cell-duration"><span class="duration-pill">1h30</span></div><div class="cell-main"><span class="session-name">Z2 + 4× 2min Z4</span><span class="session-desc">Manter motor afiado. 1h Z2 + 4 aceleradas curtas Z4. Terminar bem.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd4"></div></div></div>
+      <div class="day-row"><div class="cell-day">Qua<span class="day-date">05/ago</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z2 Leve</span><span class="session-desc">1h Z2. Fácil e fluido. Cadência 90rpm.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div></div></div>
+      <div class="day-row"><div class="cell-day">Qui<span class="day-date">06/ago</span></div><div class="cell-duration"><span class="duration-pill">1h</span></div><div class="cell-main"><span class="session-name">Z2 + 3× 1min Sprint</span><span class="session-desc">Ativa sistema neuromuscular. 45min Z2 + 3 sprints curtos + 15min Z1.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd5"></div></div></div>
+      <div class="day-row rest"><div class="cell-day">Sex<span class="day-date">07/ago</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso + Logística Final</span><span class="session-desc">Verificar gear, carga das bags, checar rota, confirmar pernoite. INÍCIO CARB LOADING.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row"><div class="cell-day">Sáb<span class="day-date">08/ago</span></div><div class="cell-duration"><span class="duration-pill">45min</span></div><div class="cell-main"><span class="session-name">Ativação Leve + Sprints</span><span class="session-desc">30min Z1/Z2 + 3 sprints de 10seg. Manter o sistema nervoso acordado.</span><span class="session-nutrition">Carb loading: 10–12g/kg/dia. Ex: 75kg → 750–900g carb. Alto IG, baixa fibra.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div><div class="zone-dot zd5"></div></div></div>
+      <div class="day-row rest"><div class="cell-day">Dom<span class="day-date">09/ago</span></div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso Total + Carb Loading</span><span class="session-desc">Sem pedal. Comer, descansar, dormir às 21h. Viagem para Águas da Prata.</span><span class="session-nutrition">Carb loading: 10–12g/kg. Priorizar: arroz, macarrão, batata, pão, banana. Pouca fibra.</span></div><div class="cell-zones"></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Volume</span><span class="total-value">~4h15</span></div>
+      <div class="total-item"><span class="total-label">Foco</span><span class="total-value">Afinação Final</span></div>
+      <div class="total-item"><span class="total-label">Carb Loading</span><span class="total-value">Sex–Dom</span></div>
+    </div>
+    <div class="notes-section green">
+      <h4>🍚 Protocolo Carb Loading — Baseado em Evidência</h4>
+      <ul>
+        <li><strong>Quantidade:</strong> 10–12g de carboidrato por kg de peso corporal, por dia, nas 36–48h pré-evento.</li>
+        <li><strong>Fontes ideais (alto IG, baixa fibra):</strong> arroz branco, macarrão, pão branco, batata, banana madura, suco de uva, bebida esportiva.</li>
+        <li><strong>Evite:</strong> legumes, grãos integrais, salada crua, alimentos ricos em gordura ou proteína em excesso.</li>
+        <li><strong>Hidratação:</strong> urina cor de palha clara em todo momento. Não force água em excesso.</li>
+        <li>Você pode ganhar 1–2kg de peso — isso é glicogênio + água armazenada. Normal e desejável.</li>
+        <li>Refeição na noite antes: pasta/arroz com frango simples. Familiar. Nunca estreie alimento novo.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══ SEMANA 10 — EVENTO ═══ -->
+  <div class="week-content" id="week-9">
+    <div class="week-header">
+      <div class="week-title-block">
+        <h2>Semana 10 — O EVENTO</h2>
+        <div class="week-dates">~16 de agosto de 2026 · Águas da Prata → Aparecida</div>
+        <p>10 semanas de preparação. O trabalho está feito. Agora é executar.</p>
+      </div>
+      <div class="week-badges"><span class="badge badge-taper">Taper Pre</span><span class="badge badge-peak">Dia 1 · 160km</span><span class="badge badge-peak">Dia 2 · 140km</span></div>
+    </div>
+    <div class="schedule">
+      <div class="day-row rest"><div class="cell-day">D-3</div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso + Carb Loading</span><span class="session-desc">Refeições ricas em carb. Sono 9h+. Mente tranquila. Sem pedal.</span><span class="session-nutrition">Carb Loading: 10–12g/kg/dia. Iniciar se ainda não iniciou.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row"><div class="cell-day">D-2</div><div class="cell-duration"><span class="duration-pill">30min</span></div><div class="cell-main"><span class="session-name">Ativação + Carb Loading</span><span class="session-desc">30min Z1/Z2. 3 sprints de 10seg. Continuar carb loading intensamente.</span><span class="session-nutrition">10–12g/kg carb. Alto IG. Dormir cedo.</span></div><div class="cell-zones"><div class="zone-dot zd1"></div><div class="zone-dot zd5"></div></div></div>
+      <div class="day-row rest"><div class="cell-day">D-1</div><div class="cell-duration"><span class="duration-pill">FOLGA</span></div><div class="cell-main"><span class="session-name">Descanso + Prep. Final</span><span class="session-desc">Verificar tudo. Embalar bags. Dormir às 21h. Refeição leve e familiar à noite.</span><span class="session-nutrition">Última refeição: 2–3h antes de dormir. Carboidrato familiar, pouca gordura.</span></div><div class="cell-zones"></div></div>
+      <div class="day-row event-day"><div class="cell-day">DIA 1</div><div class="cell-duration"><span class="duration-pill">8–10h</span></div><div class="cell-main"><span class="session-name">🏔 Águas da Prata → Ponto Médio · 160km / 4.500m ↑</span><span class="session-desc">INÍCIO ESTRITO Z2. Não acelere pela euforia. A corrida começa no km 100.</span><span class="session-nutrition">90g carb/hora (60g glicose + 30g frutose). A cada 20–25min. Não espere ter fome.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div></div></div>
+      <div class="day-row event-day"><div class="cell-day">DIA 2</div><div class="cell-duration"><span class="duration-pill">7–9h</span></div><div class="cell-main"><span class="session-name">🏁 Ponto Médio → Aparecida · 140km / 4.000m ↑</span><span class="session-desc">Pernas pesadas: NORMAL. Z2 estrito nos primeiros 30km. Dê tudo nos últimos 20km.</span><span class="session-nutrition">90g/h. Após chegada: 1–1,2g carb/kg na 1ª hora + proteína para recuperação.</span></div><div class="cell-zones"><div class="zone-dot zd2"></div><div class="zone-dot zd3"></div><div class="zone-dot zd4"></div></div></div>
+    </div>
+    <div class="week-totals">
+      <div class="total-item"><span class="total-label">Distância</span><span class="total-value">300 km</span></div>
+      <div class="total-item"><span class="total-label">Elevação</span><span class="total-value">8.500 m ↑</span></div>
+      <div class="total-item"><span class="total-label">Tempo Estimado</span><span class="total-value">15–19h</span></div>
+    </div>
+
+    <!-- TABELA NUTRIÇÃO DO EVENTO -->
     <div style="margin-top:20px">
       <table class="nut-table">
         <thead><tr><th>Período</th><th>Carboidrato</th><th>Fonte Glicose</th><th>Fonte Frutose</th><th>Frequência</th></tr></thead>
